@@ -62,7 +62,7 @@ class Image():
         self.arrays = {i: self.img[:, :, i] for i in range(self.img.shape[2])}
         self.array_approxs = {}
 
-    @st.cache_data(persist=True)
+    @st.cache(persist=True)
     def get_image_svd(self) -> Dict[int, np.ndarray]:
         """
         Calculate and return svd arrays for each dimension of image
@@ -131,7 +131,7 @@ def read_and_show_img(img_path):
     plt.imshow(img)
 
 
-def do_everything(img_path=r"C:\Users\menac\OneDrive\Documents\Presentations\Bitcoin Pics\Money.jpg", perc=60):
+def do_everything(img_path, perc=60):
     """
 
     :param img_path:
