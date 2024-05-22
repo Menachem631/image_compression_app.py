@@ -6,7 +6,7 @@ import PIL
 import random
 
 
-@st.cache
+@st.cache(suppress_st_warning=True)
 def random_sample(raw_image, processed_image):
     """
     Shuffle the order of approximate image and 3 copies of original image
@@ -23,9 +23,9 @@ if __name__ == '__main__':
     st.markdown('<link rel="stylesheet" href=styles.css>', unsafe_allow_html=True)
     st.header('IMAGE COMPRESSION')
     st.markdown('<p style="color:blue">Welcome to this demonstration of image compression,'
-                ' using Singular Value Decomposition</p>', unsafe_allow_html=True)
+                ' using Singular Value Decomposition.</p>', unsafe_allow_html=True)
 
-    image = st.file_uploader(label='Input an image to begin compression', type=['png', 'jpg'])
+    image = st.file_uploader(label='Input an image to begin compression.', type=['png', 'jpg'])
 
     if image is not None:
         raw_image = PIL.Image.open(image)
