@@ -1,7 +1,9 @@
 import cProfile
 import pstats
-import main_new
-profiler=cProfile.Profile()
+
+import main
+
+profiler = cProfile.Profile()
 profiler.enable()
 main_new.do_everything()
 profiler.disable()

@@ -1,10 +1,11 @@
-import numpy as np
-import scipy.linalg as alg
-import matplotlib.pyplot as plt
 import time
-import streamlit as st
-import pandas as pd
 from typing import List, Dict
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import scipy.linalg as alg
+import streamlit as st
 
 
 # reduced from 22 seconds (for rank 100) to 12 seconds by changing from numpy to scipy
@@ -78,7 +79,8 @@ class Image():
         :param perc: percentage of storage to be maintained in approximation
         :return:
         """
-        self.desired_rank = round((self.img.shape[0] * self.img.shape[1]) / (self.img.shape[0] + self.img.shape[1]) * perc / 100)
+        self.desired_rank = round(
+            (self.img.shape[0] * self.img.shape[1]) / (self.img.shape[0] + self.img.shape[1]) * perc / 100)
 
     def add_ranks(self, svd_results) -> np.ndarray:
         """
@@ -89,13 +91,14 @@ class Image():
         """
 
         for i in range(self.img.shape[2]):
-            self.array_approxs[i] = svd_results[i].sigma[:self.desired_rank] * svd_results[i].U[:, :self.desired_rank] @ svd_results[i].V_t[
-                                                                                                   :self.desired_rank]
+            self.array_approxs[i] = svd_results[i].sigma[:self.desired_rank] * svd_results[i].U[:, :self.desired_rank] @ \
+                                    svd_results[i].V_t[
+                                    :self.desired_rank]
 
         return np.concatenate([i[:, :, np.newaxis] for i in self.array_approxs.values()], axis=2) / 255
 
     # @st.cache
-    def get_stats(self, svd_results, maximum=25)->pd.DataFrame:
+    def get_stats(self, svd_results, maximum=25) -> pd.DataFrame:
         """
         Calculate and return dataframe of relative storage spaces and information capture rates
 
@@ -116,7 +119,7 @@ class Image():
 
         df = pd.DataFrame({'Storage (%)': self.storage})
         for i in self.captures:
-            df[f'Channel {i+1}'] = self.captures[i]
+            df[f'Channel {i + 1}'] = self.captures[i]
         return df
 
 

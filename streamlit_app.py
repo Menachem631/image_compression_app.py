@@ -1,9 +1,7 @@
-import numpy as np
 import random
-from main_new import *
-import streamlit as st
 import PIL
-import random
+import streamlit as st
+from main import *
 
 
 @st.cache(suppress_st_warning=True)
@@ -20,16 +18,16 @@ def random_sample(raw_image, processed_image):
 
 
 if __name__ == '__main__':
-    #link stylesheet and include introduction text
+    # link stylesheet and include introduction text
     st.markdown('<link rel="stylesheet" href=styles.css>', unsafe_allow_html=True)
     st.header('IMAGE COMPRESSION')
     st.markdown('<p style="color:blue">Welcome to this demonstration of image compression,'
                 ' using Singular Value Decomposition.</p>', unsafe_allow_html=True)
 
-    #include image picker
+    # include image picker
     image = st.file_uploader(label='Input an image to begin compression.', type=['png', 'jpg'])
 
-    #once image is selected, display image and chart depicting possible compression limits
+    # once image is selected, display image and chart depicting possible compression limits
     if image is not None:
         raw_image = PIL.Image.open(image)
         np_img = np.asarray(raw_image)
@@ -45,7 +43,7 @@ if __name__ == '__main__':
                          "(The smaller the storage, the lower quality the compressed picture will have.)",
                          1.0, 100.0, value=10.0, step=0.5)
 
-        #process image and display choice
+        # process image and display choice
         proc_image.calculate_desired_rank(perc=perc)
         plotting = proc_image.add_ranks(svd_results=svd_results)
         sample = random_sample(raw_image, processed_image=plotting)
