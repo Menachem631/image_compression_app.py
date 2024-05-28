@@ -32,7 +32,7 @@ def float_range(start, stop, step) -> List:
 
 class SvdResult():
     """
-    Class to calculate and store svd results
+    Class to calculate and store svd result for individual color channel
     """
 
     def __init__(self, array):
@@ -45,7 +45,7 @@ class SvdResult():
 
 class Image():
     """
-
+    class to calculate and store compressions of image
     """
 
     def __init__(self, img):
